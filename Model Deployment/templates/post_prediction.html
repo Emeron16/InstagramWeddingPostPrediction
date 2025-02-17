@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Predict Popularity Category</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='predict_form.css') }}">
+</head>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Predict Popularity Category</title>
+    <link rel="stylesheet" href="static/styles.css">
+</head>
+<body>
+
+<div class="container">
+    {% if prediction %}
+    <div class="prediction-wrapper">
+        <p class="prediction {{ prediction.lower() }}">
+            Your post with:
+            <br> Caption: "{{ caption }}"
+            <br> Hashtags: 
+            {% for hashtag in hashtags if hashtag %}
+                <span>#{{ hashtag }}</span>
+            {% endfor %}
+            <br> May get a {{ prediction }} amount of interactions if posted on {{ formatted_date }}.
+        </p>
+    
+        {% if recommend_recommendation_dates and recommended_dates %}
+        <p class="recommendation">
+            <strong>You may get better popularity on:</strong>
+            <br>
+            {% for date in recommended_dates %}
+                {{ date }}
+                {% if not loop.last %}, {% endif %}
+            {% endfor %}
+        </p>
+        {% elif recommend_recommendation_dates and not recommended_dates %}
+        <p class="recommendation">
+            <strong>Sorry, we could not find any better posting dates for the next 14 days.</strong>
+        </p>
+        {% endif %}
+    </div>
+    {% endif %}
+    
+    <h1>Wedding Post Popularity Prediction</h1>
+    <form action="/predict" method="post">
+        <label for="recommendation_toggle">Recommend dates for the next 14 days?</label>
+        <input type="checkbox" id="recommendation_toggle" name="recommend_recommendation_dates" {% if recommend_recommendation_dates %}checked{% endif %}>
+
+        <label for="caption">Caption:</label>
+        <input type="text" id="caption" name="caption" value="{{ caption }}" required>
+
+        <label for="hashtags0">Hashtag 1:</label>
+        <input type="text" id="hashtags0" name="hashtags0" value="{{ hashtags[0] }}">
+
+        <label for="hashtags1">Hashtag 2:</label>
+        <input type="text" id="hashtags1" name="hashtags1" value="{{ hashtags[1] }}">
+
+        <label for="hashtags2">Hashtag 3:</label>
+        <input type="text" id="hashtags2" name="hashtags2" value="{{ hashtags[2] }}">
+
+        <label for="productType">Product Type:</label>
+        <select id="productType" name="productType" required>
+
+            <option value="productType_carousel_container" {% if productType == "productType_carousel_container" %}selected{% endif %}>Carousel Container (Multiple Media)</option>
+            <option value="productType_clips" {% if productType == "productType_clips" %}selected{% endif %}>Clips (Short Videos)</option>
+            <option value="productType_feed" {% if productType == "productType_feed" %}selected{% endif %}>Feed</option>
+        </select>
+
+        <label for="type">Type:</label>
+        <select id="type" name="type" required>
+            <option value="type_Image" {% if type == "type_Image" %}selected{% endif %}>Image</option>
+            <option value="type_Sidecar" {% if type == "type_Sidecar" %}selected{% endif %}>Sidecar (Multiple Media)</option>
+            <option value="type_Video" {% if type == "type_Video" %}selected{% endif %}>Video</option>
+        </select>
+
+        <label for="post_date">When Would You Like to Post (Date):</label>
+        <input type="date" id="post_date" name="post_date" value="{{ post_date }}" required>
+
+
+
+        <button type="submit">Predict</button>
+        <p class="disclaimer">
+            <strong>Disclaimer:</strong> This prediction is an educated guess based on current trends and
+             should not be taken as a guarantee of actual post performance.  Many factors can influence the reach and engagement of a post,
+              and this prediction does not account for all of them.  Use this information as a helpful estimate, but understand 
+              that the actual results may vary significantly.
+        </p>  </p>
+    </form>
+</div>
+
+    
+
+
+</body>
+
+
+</html>
