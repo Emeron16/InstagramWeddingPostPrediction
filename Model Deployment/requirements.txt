@@ -1,0 +1,10 @@
+flasgger==0.9.7.1
+Flask==3.1.0
+Flask_Cors==5.0.0
+matplotlib==3.8.0
+numpy==2.2.3
+opencv_python==4.10.0.84
+pandas==2.2.3
+pyngrok==7.2.0
+scikit_learn==1.2.2
+tensorflow==2.16.2
