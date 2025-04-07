@@ -1,4 +1,4 @@
-   ```dockerfile
+   
    # Use an official Python runtime as a base image
    FROM python:3.9-slim
 
@@ -30,9 +30,11 @@
    # Expose port 5001 (default for Flask) and 4040 (for Ngrok)
    EXPOSE 5001
    EXPOSE 4040
+   EXPOSE 8000
+
 
    # Set environment variables
-   ENV FLASK_APP=FlaskDeploymentHandGesture.py
+   ENV FLASK_APP=app.py
    ENV FLASK_RUN_HOST=0.0.0.0
 
    # Entrypoint command
