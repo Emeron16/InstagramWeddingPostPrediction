@@ -9,11 +9,6 @@
        && apt-get clean \
        && rm -rf /var/lib/apt/lists/*
 
-   # Install dependencies for downloading ngrok
-   RUN apt-get update && apt-get install -y \
-       wget \
-       unzip \
-       curl
 
    # Set the working directory inside the container
    WORKDIR /app
@@ -28,7 +23,6 @@
    COPY . /app/
 
    # Expose port 5001 (default for Flask) and 4040 (for Ngrok)
-   EXPOSE 5001
    EXPOSE 4040
    EXPOSE 8000
 

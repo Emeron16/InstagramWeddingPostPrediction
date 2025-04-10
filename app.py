@@ -14,7 +14,6 @@ import os
 import io
 import base64
 from tensorflow.keras.models import load_model
-from pyngrok import ngrok, conf
 import getpass
 import threading
 from flasgger import Swagger
