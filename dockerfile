@@ -23,7 +23,6 @@
    COPY . /app/
 
    # Expose port 5001 (default for Flask) and 4040 (for Ngrok)
-   EXPOSE 4040
    EXPOSE 8000
 
 
@@ -32,4 +31,4 @@
    ENV FLASK_RUN_HOST=0.0.0.0
 
    # Entrypoint command
-   CMD ["flask", "run", "--no-reload", "--host=0.0.0.0", "--port=8000"]
+   CMD ["gunicorn", "--bind", "0.0.0.0:8000", "app:app"]

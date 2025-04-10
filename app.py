@@ -245,7 +245,7 @@ def get_season(month):
         return 'Fall'
 
 if __name__ == '__main__':
-    threading.Thread(target=app.run, kwargs={"host": "0.0.0.0", "port": 8000, "use_reloader": False}).start()
+    app.run(host='0.0.0.0', port=int(os.environ.get('PORT', 8000)))
 
 
 
